@@ -10,6 +10,13 @@
  */
 
 / {
+        aliases {
+                mxcfb0 = &mxcfb1;
+                mxcfb1 = &mxcfb2;
+                mxcfb2 = &mxcfb3;
+                mxcfb3 = &mxcfb4;
+        };
+
 	sound {
 		compatible = "fsl,imx6-wandboard-sgtl5000",
 			     "fsl,imx-audio-sgtl5000";
