@@ -10,30 +10,6 @@
  */
 
 / {
-	regulators {
-		compatible = "simple-bus";
-		#address-cells = <1>;
-		#size-cells = <0>;
-
-		reg_2p5v: regulator@0 {
-			compatible = "regulator-fixed";
-			reg = <0>;
-			regulator-name = "2P5V";
-			regulator-min-microvolt = <2500000>;
-			regulator-max-microvolt = <2500000>;
-			regulator-always-on;
-		};
-
-		reg_3p3v: regulator@1 {
-			compatible = "regulator-fixed";
-			reg = <1>;
-			regulator-name = "3P3V";
-			regulator-min-microvolt = <3300000>;
-			regulator-max-microvolt = <3300000>;
-			regulator-always-on;
-		};
-	};
-
 	sound {
 		compatible = "fsl,imx6-wandboard-sgtl5000",
 			     "fsl,imx-audio-sgtl5000";
@@ -54,6 +30,27 @@
 		spdif-controller = <&spdif>;
 		spdif-out;
 	};
+
+        v4l2_cap_2 { // mipi-csi2 camera
+                compatible = "fsl,imx6q-v4l2-capture";
+                ipu_id = <0>;
+                csi_id = <1>;
+                mclk_source = <0>;
+                status = "okay";
+        };
+
+        v4l2_out {
+                compatible = "fsl,mxc_v4l2_output";
+                status = "okay";
+        };
+};
+
+&mipi_csi {
+        ipu_id = <0>;
+        csi_id = <1>;
+        v_channel = <0>;
+        lanes = <2>;
+        status = "okay";
 };
 
 &audmux {
@@ -75,6 +72,24 @@
 		VDDA-supply = <&reg_2p5v>;
 		VDDIO-supply = <&reg_3p3v>;
 	};
+
+        ov5640_mipi@3c {
+                compatible = "ovti,ov564x_mipi";
+                reg = <0x3c>;
+                clocks = <&clks 147>;
+                clock-names = "csi_mclk";
+                DOVDD-supply = <&reg_1p8v>;
+                AVDD-supply = <&reg_2p5v>;
+                DVDD-supply = <&reg_1p8v>;
+                pwn-gpios = <&gpio6 9 1>;
+                rst-gpios = <&gpio2 5 0>;
+                ipu_id = <0>;
+                csi_id = <1>;
+                mclk = <22000000>;
+                mclk_source = <0>;
+                pwms = <&pwm3 0 45>;
+                status = "okay";
+        };
 };
 
 &iomuxc {
@@ -259,4 +274,36 @@
 	pinctrl-0 = <&pinctrl_usdhc3>;
 	cd-gpios = <&gpio3 9 0>;
 	status = "okay";
+};
+
+&mxcfb1 {
+        status = "okay";
+};
+
+&mxcfb2 {
+        status = "okay";
+};
+
+&mxcfb3 {
+        status = "okay";
+};
+
+&mxcfb4 {
+        status = "okay";
+};
+
+&hdmi_audio {
+        status = "okay";
+};
+
+&hdmi_cec {
+        status = "okay";
+};
+
+&hdmi_core {
+        status = "okay";
+};
+
+&hdmi_video {
+        status = "okay";
 };
