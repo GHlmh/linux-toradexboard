@@ -1884,9 +1884,9 @@ static int mxc_v4l_close(struct file *file)
 	return err;
 }
 
-#if defined(CONFIG_MXC_IPU_PRP_ENC) || defined(CONFIG_MXC_IPU_CSI_ENC) || \
+/*#if defined(CONFIG_MXC_IPU_PRP_ENC) || defined(CONFIG_MXC_IPU_CSI_ENC) || \
     defined(CONFIG_MXC_IPU_PRP_ENC_MODULE) || \
-    defined(CONFIG_MXC_IPU_CSI_ENC_MODULE)
+    defined(CONFIG_MXC_IPU_CSI_ENC_MODULE)*/
 /*
  * V4L interface - read function
  *
@@ -1972,7 +1972,7 @@ exit0:
 
 	return cam->v2f.fmt.pix.sizeimage - err;
 }
-#endif
+//#endif
 
 /*!
  * V4L interface - ioctl function
