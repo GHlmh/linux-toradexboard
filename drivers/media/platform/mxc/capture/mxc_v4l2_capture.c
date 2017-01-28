@@ -1886,7 +1886,7 @@ static int mxc_v4l_close(struct file *file)
 
 #if defined(CONFIG_MXC_IPU_PRP_ENC) || defined(CONFIG_MXC_IPU_CSI_ENC) || \
     defined(CONFIG_MXC_IPU_PRP_ENC_MODULE) || \
-    defined(CONFIG_MXC_IPU_CSI_ENC_MODULE)*/
+    defined(CONFIG_MXC_IPU_CSI_ENC_MODULE)
 /*
  * V4L interface - read function
  *
